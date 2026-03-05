@@ -1,53 +1,196 @@
+:root {
+  --bg: #101522;
+  --panel: #1a2133;
+  --text: #f4f7ff;
+  --muted: #9aa3bf;
+  --accent: #6e8bff;
+  --accent-dark: #4b6af2;
+  --operator: #f08b28;
+  --operator-dark: #d67216;
+  --danger: #d14e5a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(circle at top, #1f2a44, var(--bg) 50%);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
 
-    .calculator {
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 300px;
-    }
+.app-shell {
+  width: min(940px, 100%);
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(240px, 280px);
+  gap: 18px;
+}
 
-    h2 {
-      margin-bottom: 20px;
-      color: #333;
-    }
+.calculator,
+.history-panel {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+}
 
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
+.calculator {
+  padding: 20px;
+}
 
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 8px;
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-    }
+.calculator-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
 
-    button:hover {
-      background-color: #0056b3;
-    }
+.calculator-header p {
+  margin: 6px 0 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
 
-    #result {
-      margin-top: 20px;
-      font-size: 20px;
-      color: #007bff;
-      font-weight: bold;
-    }
+.display-wrap {
+  background: rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.expression {
+  height: 24px;
+  color: var(--muted);
+  text-align: right;
+  font-size: 0.95rem;
+  overflow: hidden;
+}
+
+.display {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  text-align: right;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.display:focus {
+  outline: none;
+}
+
+.grid-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn-operator {
+  background: var(--operator);
+}
+
+.btn-operator:hover {
+  background: var(--operator-dark);
+}
+
+.btn-equal {
+  background: var(--accent);
+  grid-row: span 2;
+}
+
+.btn-equal:hover {
+  background: var(--accent-dark);
+}
+
+.btn-fn,
+.btn-muted,
+.btn-memory {
+  color: #dde3f5;
+}
+
+.memory-controls {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.history-panel {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.history-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.small {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+#history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#history-list li {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 8px 10px;
+  color: #eaf0ff;
+  font-size: 0.92rem;
+}
+
+#history-list .empty {
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+}
