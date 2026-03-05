@@ -2,28 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple Calculator</title>
-<link rel="stylesheet" href="style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <main class="app-shell">
+    <section class="calculator" aria-label="Advanced calculator">
+      <header class="calculator-header">
+        <h1>Advanced Calculator</h1>
+        <p>Scientific tools + memory + history</p>
+      </header>
 
-  <div class="calculator">
-    <h2>Simple Calculator</h2>
-    <input type="number" id="num1" placeholder="Enter first number" />
-    <input type="number" id="num2" placeholder="Enter second number" />
+      <div class="display-wrap">
+        <div id="expression" class="expression" aria-live="polite"></div>
+        <input id="display" class="display" type="text" value="0" readonly aria-label="Calculator display">
+      </div>
 
-    <div>
-      <button onclick="calculate('+')">+</button>
-      <button onclick="calculate('-')">−</button>
-      <button onclick="calculate('*')">×</button>
-      <button onclick="calculate('/')">÷</button>
-    </div>
+      <div class="grid-buttons" role="group" aria-label="Calculator buttons">
+        <button class="btn btn-muted" data-action="clear-entry">CE</button>
+        <button class="btn btn-muted" data-action="all-clear">AC</button>
+        <button class="btn btn-muted" data-action="backspace">⌫</button>
+        <button class="btn btn-operator" data-value="/">÷</button>
 
-    <div id="result">Result: 0</div>
-  </div>
+        <button class="btn btn-fn" data-action="percent">%</button>
+        <button class="btn btn-fn" data-action="square">x²</button>
+        <button class="btn btn-fn" data-action="sqrt">√x</button>
+        <button class="btn btn-operator" data-value="*">×</button>
 
- 
-<script src="script.js"></script>
+        <button class="btn" data-value="7">7</button>
+        <button class="btn" data-value="8">8</button>
+        <button class="btn" data-value="9">9</button>
+        <button class="btn btn-operator" data-value="-">−</button>
+
+        <button class="btn" data-value="4">4</button>
+        <button class="btn" data-value="5">5</button>
+        <button class="btn" data-value="6">6</button>
+        <button class="btn btn-operator" data-value="+">+</button>
+
+        <button class="btn" data-value="1">1</button>
+        <button class="btn" data-value="2">2</button>
+        <button class="btn" data-value="3">3</button>
+        <button class="btn btn-equal" data-action="equals" rowspan="2">=</button>
+
+        <button class="btn btn-fn" data-action="toggle-sign">±</button>
+        <button class="btn" data-value="0">0</button>
+        <button class="btn" data-value=".">.</button>
+      </div>
+
+      <div class="memory-controls" role="group" aria-label="Memory buttons">
+        <button class="btn btn-memory" data-action="memory-clear">MC</button>
+        <button class="btn btn-memory" data-action="memory-recall">MR</button>
+        <button class="btn btn-memory" data-action="memory-add">M+</button>
+        <button class="btn btn-memory" data-action="memory-subtract">M-</button>
+      </div>
+    </section>
+
+    <aside class="history-panel" aria-label="Calculation history">
+      <div class="history-header">
+        <h2>History</h2>
+        <button class="btn btn-muted small" id="clear-history">Clear</button>
+      </div>
+      <ul id="history-list"></ul>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
